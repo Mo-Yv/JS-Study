@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>60秒倒计时</title>
+	</head>
+	<style>
+		button{
+			width: 200px;
+			height: 50px;
+			background-color: #fff;
+			font-size: 25px;
+			color: black;
+			cursor: pointer;
+		}
+		button[disabled]{
+			cursor: default;
+			background-color: #000;
+			color: #fff;
+		}
+	</style>
+	<body>
+		<button onclick="btnClick(this)">开始倒计时</button>
+		<script>
+			function btnClick(obj){
+				var time = 60;
+				obj.disabled = true;
+				obj.innerHTML = "还剩60秒";
+				var timer = setInterval(function(){
+					if(time == 1){
+						clearInterval(timer);
+						obj.disabled = false;
+						obj.innerHTML = "重新开始";
+					}else{
+						time--;
+						if(time < 10){
+							obj.innerHTML = "还剩0" + time + "秒";
+						}else{
+							obj.innerHTML = "还剩" + time + "秒";
+						}
+					}
+				},1000);
+			}
+		</script>
+	</body>
+</html>
