@@ -1,8 +1,8 @@
-for (let i = 1; i <= 9; i++) {
-  for (let j = 1; j <= 9; j++) {
+for (let i = 1; i < 10; i++) {
+  for (let j = 1; j <= i; j++) {
     if (j <= i) {
-      document.write(`${j}*${i}=${j*i}&nbsp;`);
+      document.write(j, "*", i, "=", i * j, "&nbsp;");
     }
   }
-  document.write('<br>');
+  document.write("<br/>");
 }
