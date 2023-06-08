@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获取文件后缀名</title>
+	</head>
+	<body>
+		<p><input type="file" name="file" id="file"></p>
+		<button onclick="getSuffix()">获取文件后缀名</button>
+		<p id="suffixStr"></p>
+		<script>
+			const file = document.getElementById("file");
+			function getSuffix(){
+				let fileVal = file.value;
+				if(fileVal == ""){
+					alert("请先选择文件");
+				}else{
+					let fileNames = fileVal.split("\\"),
+						fileName = fileNames[fileNames.length - 1],
+						// index = fileName.indexOf(".") - fileName.length + 1,
+						// suffix = fileName.slice(index);
+						suffix = fileName.split('.').pop();
+					document.getElementById("suffixStr").innerHTML = `文件名:${fileName},<br>后缀名:${suffix}`;
+				}
+			}
+		</script>
+	</body>
+</html>
