@@ -86,7 +86,7 @@
 				isSelectAllFn();
 				switchCheckedFn();
 			};
-      // 单独选择或取消选择
+      			// 单独选择或取消选择
 			items.forEach(item => {
 				item.onclick = function () {
 					isSelectAllFn();
@@ -96,14 +96,14 @@
 
 			// 提交 输出选择结果
 			getID("submit").onclick = function () {
-        // 存储每一个item的checked状态
+        			// 存储每一个item的checked状态
 				var state = [];
 				for (let i = 0; i < items.length; i++) {
 					state.push(items[i].checked);
 				}
-        // 有选择
+        			// 有选择
 				if (state.includes(true)) {
-          // 存储选择结果
+          				// 存储选择结果
 					var hobby = "";
 					for (let i = 0; i < items.length; i++) {
 						if (items[i].checked) {
