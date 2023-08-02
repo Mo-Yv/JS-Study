@@ -1,28 +1,42 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" />
 		<title>获取文件后缀名</title>
 	</head>
 	<body>
-		<p><input type="file" name="file" id="file"></p>
-		<button onclick="getSuffix()">获取文件后缀名</button>
-		<p id="suffixStr"></p>
+		<input type="file" />
+		<p></p>
 		<script>
-			const file = document.getElementById("file");
-			function getSuffix(){
-				let fileVal = file.value;
-				if(fileVal == ""){
-					alert("请先选择文件");
-				}else{
-					let fileNames = fileVal.split("\\"),
-						fileName = fileNames[fileNames.length - 1],
-						// index = fileName.indexOf(".") - fileName.length + 1,
-						// suffix = fileName.slice(index);
-						suffix = fileName.split('.').pop();
-					document.getElementById("suffixStr").innerHTML = `文件名:${fileName},<br>后缀名:${suffix}`;
-				}
-			}
+			document.addEventListener("keydown", e => {
+				// 取消默认事件
+				e.preventDefault();
+				// 获取选择的文件(文件路径)
+				let fileVal = document.querySelector("input").value;
+				// 判断是否选择了文件或是否按下回车键
+				if (e.keyCode !== 13 || !fileVal) return console.log("请选择文件,之后按回车键执行");
+				// 以"\"将文件路径分割为数组
+				let fileNames = fileVal.split("\\"),
+					// 数组的最后一项就是文件名
+					fileName = fileNames[fileNames.length - 1],
+					/* 方案一 */
+					// 用(文件名的长度 - 最后的"."所在的下标 - 1)得到后缀名的长度
+					// 最后的".": 是为了应对类似vue.min.js,这种有多个"."的情况
+					// -1: 是因为下标从0开始,而length从1开始
+					// suffixLength = fileName.length - fileName.lastIndexOf(".") - 1,
+					// 再从后向前截取出-suffixLength的内容就是后缀名
+					// suffix = fileName.slice(-suffixLength);
+					/* 方案二 */
+					// 再以"."将文件名分割为数组,数组的最后一项就是后缀名
+					suffix = fileName.split(".").pop();
+
+				/* 方案三 */
+				// 直接根据最后一个"."的下标切割整个路径
+				// 但无法得到文件名
+				// suffix = fileVal.substring(fileVal.lastIndexOf(".") + 1);
+					
+				document.querySelector("p").innerHTML = `文件名: $fileName}<br>后缀名: ${suffix}`;
+			});
 		</script>
 	</body>
 </html>
