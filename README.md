@@ -1,2 +1,2 @@
 # JS-Learning
-Here are some demos I did while learning JS (For personal study only)
+这些是本人在初学js时做的一些小案例
