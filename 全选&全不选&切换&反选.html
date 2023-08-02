@@ -9,9 +9,7 @@
 		<form action="javascript:;">
 			<input type="checkbox" id="switchChecked" />全选/全不选
 			<br />
-			<input type="checkbox" name="items" value="A" />A 
-			<input type="checkbox" name="items" value="B" />B 
-			<input type="checkbox" name="items" value="C" />C
+			<input type="checkbox" name="items" value="A" />A <input type="checkbox" name="items" value="B" />B <input type="checkbox" name="items" value="C" />C
 			<input type="checkbox" name="items" value="D" />D
 			<br />
 			<input type="button" id="selectAll" value="全选" />
@@ -21,44 +19,36 @@
 		</form>
 		<p id="result"></p>
 		<script>
-			// id获取元素
-			var getID = id => document.getElementById(id);
+			// 封装id获取元素方法
+			const getID = id => document.getElementById(id);
 			// 获取items
-			var items = document.getElementsByName("items");
+			const items = document.getElementsByName("items");
 			// 储存状态,是否全选,默认false
-			var isSelectAll = false;
+			let isSelectAll = false;
 
 			// 判断所有item的checked
-			function isSelectAllFn() {
+			const isSelectAllFn = () => {
 				// 存储每一个items的checked状态
-				var state = [];
-				for (let i = 0; i < items.length; i++) {
-					state.push(items[i].checked);
-				}
+				let state = [];
+				items.forEach(item => state.push(item.checked));
 				// 判断是否是全选状态
 				isSelectAll = !state.includes(false);
-			}
+			};
 
 			// 全选/全不选绑定状态
-			function switchCheckedFn() {
-				getID("switchChecked").checked = isSelectAll;
-			}
+			const switchCheckedFn = () => (getID("switchChecked").checked = isSelectAll);
 
 			// 全选方法
-			function selectAllFn() {
+			const selectAllFn = () => {
 				isSelectAll = true;
-				for (let i = 0; i < items.length; i++) {
-					items[i].checked = isSelectAll;
-				}
-			}
+				items.forEach(item => (item.checked = isSelectAll));
+			};
 
 			// 全不选方法
-			function unselectAllFn() {
+			const unselectAllFn = () => {
 				isSelectAll = false;
-				for (let i = 0; i < items.length; i++) {
-					items[i].checked = isSelectAll;
-				}
-			}
+				items.forEach(item => (item.checked = isSelectAll));
+			};
 
 			// 全选/全不选
 			getID("switchChecked").onclick = function () {
@@ -67,50 +57,44 @@
 			};
 
 			// 全选
-			getID("selectAll").onclick = function () {
+			getID("selectAll").onclick = () => {
 				selectAllFn();
 				switchCheckedFn();
 			};
 
 			// 全不选
-			getID("unselectAll").onclick = function () {
+			getID("unselectAll").onclick = () => {
 				unselectAllFn();
 				switchCheckedFn();
 			};
 
 			// 反选
-			getID("inverse").onclick = function () {
-				for (let i = 0; i < items.length; i++) {
-					items[i].checked = !items[i].checked;
-				}
+			getID("inverse").onclick = () => {
+				items.forEach(item => (item.checked = !item.checked));
 				isSelectAllFn();
 				switchCheckedFn();
 			};
 
 			// 每次单独选择或取消选择
 			items.forEach(item => {
-				item.onclick = function () {
+				item.onclick = () => {
 					isSelectAllFn();
 					switchCheckedFn();
 				};
 			});
 
 			// 提交 输出选择结果
-			getID("submit").onclick = function () {
+			getID("submit").onclick = () => {
 				// 存储每一个item的checked状态
-				var state = [];
-				for (let i = 0; i < items.length; i++) {
-					state.push(items[i].checked);
-				}
+				let state = [];
+				items.forEach(item => state.push(item.checked));
 				// 有选择
 				if (state.includes(true)) {
 					// 存储选择结果
-					var hobby = "";
-					for (let i = 0; i < items.length; i++) {
-						if (items[i].checked) {
-							hobby += items[i].value + " ";
-						}
-					}
+					let hobby = "";
+					items.forEach(item => {
+						if (items[i].checked) hobby += items[i].value + " ";
+					});
 					getID("result").innerHTML = hobby;
 				} else {
 					getID("result").innerHTML = "未选择";
