@@ -5,7 +5,7 @@
 		<title>60秒倒计时</title>
 	</head>
 	<style>
-		button{
+		button {
 			width: 200px;
 			height: 50px;
 			background-color: #fff;
@@ -13,7 +13,7 @@
 			color: black;
 			cursor: pointer;
 		}
-		button[disabled]{
+		button[disabled] {
 			cursor: default;
 			background-color: #000;
 			color: #fff;
@@ -22,24 +22,30 @@
 	<body>
 		<button onclick="btnClick(this)">开始倒计时</button>
 		<script>
-			function btnClick(obj){
-				var time = 60;
+			function btnClick(obj) {
+				// 初始时间
+				let time = 10;
+				// 修改按钮属性和样式
 				obj.disabled = true;
-				obj.innerHTML = "还剩60秒";
-				var timer = setInterval(function(){
-					if(time == 1){
+				// 点击的瞬间修改文本
+				obj.innerHTML = "还剩" + time + "秒";
+				// 定义定时器
+				const timer = setInterval(function () {
+					// 因为定时器会有1秒延迟，所以当倒计时到1时,会延迟1秒才进入判断
+					// 统一格式时修改了数据类型,所以需要转换一下
+					if (time === 1) {
+						// 清除定时器
 						clearInterval(timer);
+						// 恢复按钮属性和样式
 						obj.disabled = false;
 						obj.innerHTML = "重新开始";
-					}else{
+					} else {
+						// 倒计时
 						time--;
-						if(time < 10){
-							obj.innerHTML = "还剩0" + time + "秒";
-						}else{
-							obj.innerHTML = "还剩" + time + "秒";
-						}
+						// 倒计时期间按钮的文本
+						obj.innerHTML = "还剩" + (time < 10 ? "0" + time : time) + "秒";
 					}
-				},1000);
+				}, 1000);
 			}
 		</script>
 	</body>
