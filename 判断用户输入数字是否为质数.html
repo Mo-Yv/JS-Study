@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>判断用户输入数字是否为质数</title>
+	</head>
+	<body>
+		输入数字: <input type="number" min="1" />
+		<p></p>
+		<script>
+			const ipt = document.querySelector("input"),
+				p = document.querySelector("p");
+      // 自动获取焦点
+			ipt.focus();
+      // 绑定键盘回车事件
+			ipt.onkeydown = e => {
+				if (e.key !== "Enter") return;
+				// 接收输入的数据
+				const num = ipt.value;
+				// 数据合法性校验
+				if (num <= 1 || num % 1) {
+					p.innerHTML = "数据无效!";
+				} else {
+					// 记录状态
+					let isPrime = true;
+					// 遍历从2到根号num的数字
+					// 如果根号num之前没有num的因数
+					// 那么根号num之后一定也没有
+					// 可以缩小遍历范围,优化性能
+					for (let i = 2; i <= Math.sqrt(num); i++) {
+						// 取模,如果值为0,说明num可以被i整除,num不是质数
+						if (!(num % i)) {
+							// 修改状态
+							isPrime = false;
+							// 已经确定结果,后面的数字没必要继续遍历了,结束循环,优化性能
+							break;
+						}
+					}
+					// 判断状态,打印结果
+					p.innerHTML = num + (isPrime ? "" : "不") + "是质数";
+				}
+			};
+		</script>
+	</body>
+</html>
