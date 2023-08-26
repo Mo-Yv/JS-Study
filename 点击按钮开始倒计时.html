@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>60秒倒计时</title>
+		<title>倒计时</title>
 	</head>
 	<style>
 		button {
@@ -28,7 +28,7 @@
 				// 修改按钮属性和样式
 				obj.disabled = true;
 				// 点击的瞬间修改文本
-				obj.innerHTML = "还剩" + time + "秒";
+				obj.innerHTML = `还剩${time}秒`;
 				// 定义定时器
 				const timer = setInterval(function () {
 					// 因为定时器会有1秒延迟，所以当倒计时到1时,会延迟1秒才进入判断
@@ -42,7 +42,7 @@
 						// 倒计时
 						time--;
 						// 倒计时期间按钮的文本
-						obj.innerHTML = "还剩" + (time < 10 ? "0" + time : time) + "秒";
+						obj.innerHTML = `还剩${time < 10 ? "0" + time : time}秒`;
 					}
 				}, 1000);
 			}

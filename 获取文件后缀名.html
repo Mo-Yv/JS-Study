@@ -24,18 +24,21 @@
 					// 最后的".": 是为了应对类似vue.min.js,这种有多个"."的情况
 					// -1: 是因为下标从0开始,而length从1开始
 					// suffixLength = fileName.length - fileName.lastIndexOf(".") - 1,
+
 					// 再从后向前截取出-suffixLength的内容就是后缀名
 					// suffix = fileName.slice(-suffixLength);
+
 					/* 方案二 */
 					// 再以"."将文件名分割为数组,数组的最后一项就是后缀名
 					suffix = fileName.split(".").pop();
 
 				/* 方案三 */
 				// 直接根据最后一个"."的下标切割整个路径
-				// 但无法得到文件名
+				// 但要想得到文件名就得另外处理了
 				// suffix = fileVal.substring(fileVal.lastIndexOf(".") + 1);
-					
-				document.querySelector("p").innerHTML = `文件名: $fileName}<br>后缀名: ${suffix}`;
+				
+				// 打印文件名和后缀名
+				document.querySelector("p").innerHTML = `文件名: ${fileName}<br>后缀名: ${suffix}`;
 			});
 		</script>
 	</body>
